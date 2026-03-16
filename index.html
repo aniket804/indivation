@@ -1,246 +1,511 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Indivation Exports Pvt Ltd</title>
+import React from "react";
+import { motion } from "framer-motion";
+import {
+  ArrowRight,
+  Globe2,
+  Handshake,
+  Layers3,
+  MapPin,
+  PackageCheck,
+  Sparkles,
+  ChevronDown,
+} from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+const INDIVATION_EMBLEM = "data:image/png;base64,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";
+const MASTERMEDI_LOGO = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAARgAAABYCAYAAABIlzA2AAAjdUlEQVR42u2deZQV1b3nT3d1dXXvYVhGDIbB2GBhYJg0sXHh4wYgxpRLKk1iI1XjeIzRWMqYxJI0ljM2Tixj4qQxxhj7EMbG2AwbA8MgWQMG2Z1hUHdnd1dX6X3v7+csHd2NZBh3tvh8n7rV6ur7+vXqlfV8nnPuc4yRzA7W2AXAB4XCF88KJhlkdUXmAD72My5WnBXsYw9iLwPYhcBWAu7DDvYQQJwP6AjgT5EZQ3lC4Qrgd8C0iCKCvlzw+1CEJ+ygF/A/UYQn6mQ/xG4C/g3YC8A4FYxB/8LTg12dLWwBXAuI4wDHgQ2AekQ/uxxQeP45YC9gg8lswAFnT8SmAbknQ9kA1vQO8M5gOkR5wJeK7J8H5oXfhQTwB3A8kL0MwQYgpQRpAbwD2JwL5J0PpJ7P6yTgM8ByQm0RlwHnALkT8NwF5JkP7ANcJ0R1QDoA3gLuB7KfAy4G9gHJGQ9sBf4bKHQ/MAtYB2R0PpA/As3njcD6b0A4gNwKpB+AP4C3C3EwIuA7I7H0gk1GJ/3x0NsCZAmR0PpCzA+AF4FwiL6JfRwAXA9kZP+5uKsgm4GpgG5DQ+kNsDzwD5Ge9tEwW8DkR0PrA4AFgJpAe8B1gKpEb8vM9m4NshP+4j8CLQ9sD4ArA9kZP+5oN0LZHQ+MAOQHkZz+6QX4N1A+gPZHQ+kL4E/A+QPkD5B2h0PpC+APwPkD5A+QdoZD6QvgD8D5A+QPkHaHQ+kL4A/A+QPkD5B2hkPpC+APwPkD5A+QdoZD6QvgD8D5A+QPkHaGQ+kL4A/A+QPkD5B2hkPpC+APwPkD5A+QdoZD6QvgD8D5A+QPkHaGQ+kL4A/A+QPkD5B2hkPpC+APwPkD5A+QdoZD6QvgD8D5A+QPkHaGQ+kL4A/A+QPkD5B2hkPpC+APwPkD5A+QdoZD6QvgD8D5A+QPkHaGQ+kL4A/A+QPkD5B2hkPpC+APwPkD5A+QdoZD6QvgD8D5A+QPkHaGQ+kL4A/A+QPkD5B2hkPpC+APwPkD5A+QdoZD6QvgD8D5A+QPkHaGQ+kL4A/A+QPkD5B2hkPpC+APwPkD5A+QdoZD6QvgD8D5A+QPkHaGQ+kL4A/A+QPkD5B2hkPpC+APwPkD5A+QdoZD6QvgD8D5A+QPkHaGQ+kL4A/A+QPkD5B2hkPpC+APwPkD5A+QdoZD6QvgD8D5A+QPkHaGQ+kL4A/A+QPkD5B2hkPpC+APwPkD5A+QdoZD6QvgD8D5A+QPkHaGQ+kL4A/A+QPkD5B2hkPpC+APwPkD5A+QdoZD6QvgD8D5A+QPkHaGQ+kL4A/A+QPkD5B2hkPpC+APwPkD5A+QdoZD6QvgD8D5A+QPkHaGQ+kL4A/A+QPkD5B2hkPpC+APwPkD5A+QdoZD6QvgD8D5A+QPkHaGQ+kL4A/A+QPkD5B2hkPpC+APwPkD5A+QdoZD6QvgD8D5A+QPkHaGQ+kL4A/A+QPkD5B2hkPpC+APwPkD5A+QdoZD6QvgD8D5A+QPkHaGQ+kL4A/A+QPkD5B2hkPpC+APwPkD5A+QdoZD6QvgD8D5A+QPkHaGQ+kL4A/A+QPkD5B2hkPpC+APwPkD5A+QdoZD6QvgD8D5A+QPkHaGQ+kL4A/A+QPkD5B2hkPpC+APwPkD5A+QdoZD6QvgD8D5A+QPkHaGQ+kL4A/A+QPkD5B2hkPpC+APwPkD5A+QdoZD6QvgD8D5A+QPkHaGQ+kL4A/A+QPkD5B2hkPpC+APwPkD5A+QdoZD6QvgD8D5A+QPkHaGQ+kL4A/A+QPkD5B2hkPpC+APwPkD5A+QdoZD6QvgD8D5A+QPkHaGQ+kL4A/A+QPkD5B2hkPpC+APwPkD5A+QdoZD6QvgD8D5A+QPkHaGQ+kL4A/A+QPkD5B2hkPpC+APwPkD5A+QdoZD6QvgD8D5A+QPkHaGQ+kL4A/A+QPkD5B2hkPpC+APwPkD5A+QdoZD6QvgD8D5A+QPkHaGQ+kL4A/A+QPkD5B2hkPpC+APwPkD5A+QdoZD6QvgD8D5A+QPkHaGQ+kL4A/A+QPkD5B2hkPpC+APwPkD5A+QdoZD6QvgD8D5A+QPkHaGQ+kL4A/A+QPkD5B2h0PpD+Ay0vE+eQ4LS8AAAAASUVORK5CYII=";
+const KARMA_LOGO = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAARgAAABYCAYAAABIlzA2AAAgdElEQVR42u2de7BUVb3HP3vOfM/MzJmZyQ5mMgzDMMwM5mQYhggRFAq2RShlJkGoaVZba2lp3VpbW+1iO7a2Q1u3rbW2tmr7iWq1lMZCipGg0KR0VJQjA0EFBAQERkQECmRmyF2u+v3n2bNn5j7r3Hvvvfd7/3nP+X3nPuec9znneTtT6w0C1wJmAK8C+gB4H7AZ8D5gKZCbQG0n8Qm4GfBv4KqAtgJvAeYB2gJ5C2QtgO+AvwB+H7gL0H8N8C4gF7gVyL6JfAPoDWAukN8F0QvQ9wB9A1wP5D7gO4D5gB5C+Q84G0jvA9wJpC8BfwIuBLIb8AbgPiH6JvAZ4D4g+iXwGeA+IPol8BngPiD6JfAZ4D4g+iXwGeA+IPol8BngPiD6JfAZ4D4g+iXwGeA+IPol8BngPiD6JfAZ4D4g+iXwGeA+IPol8BngPiD6JfAZ4D4g+iXwGeA+IPol8BngPiD6JfAZ4D4g+iXwGeA+IPol8BngPiD6JfAZ4D4g+iXwGeA+IPol8BngPiD6JfAZ4D4g+iXwGeA+IPol8BngPiD6JfAZ4D4g+iXwGeA+IPol8BngPiD6JfAZ4D4g+iXwGeA+IPol8BngPiD6JfAZ4D4g+iXwGeA+IPol8BngPiD6JfAZ4D4g+iXwGeA+IPol8BngPiD6JfAZ4D4g+iXwGeA+IPol8BngPiD6JfAZ4D4g+iXwGeA+IPol8BngPiD6JfAZ4D4g+iXwGeA+IPol8BngPiD6JfAZ4D4g+iXwGeA+IPol8BngPiD6JfAZ4D4g+iXwGeA+IPol8BngPiD6JfAZ4D4g+iXwGeA+IPol8BngPiD6JfAZ4D4g+iXwGeA+IPol8BngPiD6JfAZ4D4g+iXwGeA+IPol8BngPiD6JfAZ4D4g+iXwGeA+IPol8BngPiD6JfAZ4D4g+iXwGeA+IPol8BngPiD6JfAZ4D4g+iXwGeA+IPol8BngPiD6JfAZ4D4g+iXwGeA+IPol8BngPiD6JfAZ4D4g+iXwGeA+IPol8BngPiD6JfAZ4D4g+iXwGeA+IPol8BngPiD6JfAZ4D4g+iXwGeA+IPol8BngPiD6JfAZ4D4g+iXwGeA+IPol8BngPiD6JfAZ4D4g+iXwGeA+IPol8BngPiD6JfAZ4D4g+iXwGeA+IPol8BngPiD6JfAZ4D4g+iXwGeA+IPol8BngPiD6JfAZ4D4g+iXwGeA+IPol8BngPiD6JfAZ4D4g+iXwGeA+IPol8BngPiD6JfAZ4D4g+iXwGeA+IPol8BngPiD6JfAZ4D4g+iXwGeA+IPol8BngPiD6JfAZ4D4g+iXwGeA+IPol8BngPiD6JfAZ4D4g+iXwGeA+IPol8BngPiD6JfAZ4D4g+iXwGeA+IPol8BngPiD6JfAZ4D4g+iXwGeA+IPol8BngPiD6JfAZ4D4g+iXwGeA+IPol8BngPiD6JfAZ4D4g+iXwGeA+IPol8BngPiD6JfAZ4D4g+iXwGeA+IPol8BngPiD6JfAZ4D4g+iXwGeA+IPol8BngPiD6JfAZ4D4g+iXwGeA+IPol8BngPiD6JfAZ4D4g+iXwGeA+IPol8BngPiD6JfAZ4D4g+iXwGeA+IPol8BngPiD6JfAZ4D4g+iXwGeA+IPol8BngPiD6JfAZ4D4g+iXwGeA+IPol8BngPiD6JfAZ4D4g+iXwGfDk6whtV5zD4AAAAAElFTkSuQmCC";
+const URBANHUT_LOGO = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAARgAAABYCAYAAABIlzA2AAApTElEQVR42u2deXBU1b3/P+fcfTMTZjZJZiY7mQkzhQkBCAQREWSyS5AQ0Fqta1vW1ra1rW33r7b1tW1bW3vbta3V1rZWpQqoqEBEwAQkQCIzM+fMZJmZ3Z/fP6W7UJJMZnZ2V/f7Pmc7ySxJ33PPvfd+z7nnfO655x0hhAqXw3sA2wNfB9wKfBz4JfB3QHcCngW8ATgFeBPwV8B5wL8B3gD8HPAJ4JfA0wGfA24E3gR8G/AZ4HfA6wI3A34F3An4J+AbwN8A3wB8GvA04JfA5wJ+A7gB8C/Af4J8H3A08B3gR8D/ATwC+AHwK8CvgV8D3gI8A/gJ8C3gB8BvA34L+CHgV8A/Az4JeA2wK+A3gV8Dfgm4DbAr4DeBXwN+CbANsCvgN4FfA34JsA2wK+A3gV8DfgmwDbAr4DeBXwN+CbANsCvgN4FfA34JsA2wK+A3gV8DfgmwDbAr4DeBXwN+CbANsCvgN4FfA34JsA2wK+A3gV8DfgmwDbAr4DeBXwN+CbANsCvgN4FfA34JsA2wK+A3gV8DfgmwDbAr4DeBXwN+CbANsCvgN4FfA34JsA2wK+A3gV8DfgmwDbAr4DeBXwN+CbANsCvgN4FfA34JsA2wK+A3gV8DfgmwDbAr4DeBXwN+CbANsCvgN4FfA34JsA2wK+A3gV8DfgmwDbAr4DeBXwN+CbANsCvgN4FfA34JsA2wK+A3gV8DfgmwDbAr4DeBXwN+CbANsCvgN4FfA34JsA2wK+A3gV8DfgmwDbAr4DeBXwN+CbANsCvgN4FfA34JsA2wK+A3gV8DfgmwDbAr4DeBXwN+CbANsCvgN4FfA34JsA2wK+A3gV8DfgmwDbAr4DeBXwN+CbANsCvgN4FfA34JsA2wK+A3gV8DfgmwDbAr4DeBXwN+CbANsCvgN4FfA34JsA2wK+A3gV8DfgmwDbAr4DeBXwN+CbANsCvgN4FfA34JsA2wK+A3gV8DfgmwDbAr4DeBXwN+CbANsCvgN4FfA34JsA2wK+A3gV8DfgmwDbAr4DeBXwN+CbANsCvgN4FfA34JsA2wK+A3gV8DfgmwDbAr4DeBXwN+CbANsCvgN4FfA34JsA2wK+A3gV8DfgmwDbAr4DeBXwN+CbANsCvgN4FfA34JsA2wK+A3gV8DfgmwDbAr4DeBXwN+CbANsCvgN4FfA34JsA2wK+A3gV8DfgmwDbAr4DeBXwN+CbANsCvgN4FfA34JsA2wK+A3gV8DfgmwDbAr4DeBXwN+CbANsCvgN4FfA34JsA2wK+A3gV8DfgmwDbAr4DeBXwN+CbANsCvgN4FfA34JsA2wK+A3gV8DfgmwDbAr4DeBXwN+CbANsCvgN4FfA34JsA2wK+A3gV8DfgmwDbAr4DeBXwN+CbANsCvgN4FfA34JsA2wK+A3gV8DfgmwDbAr4DeBXwN+CbANsCvgN4FfA34JsA2wK+A3gV8DfgmwDbAr4DeBXwN+CbANsCvgN4FfA34JsA2wK+A3gV8DfgmwDbAr4DeBXwN+CbANsCvgN4FfA34JsA2wK+A3gV8DfgmwDbAr4DeBXwN+CbANsCvgN4FfA34JsA2wK+A3gV8Dfgm+CNQHn2q9gXMAAAAASUVORK5CYII=";
+const LUXEORIA_LOGO = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAARgAAABYCAYAAABIlzA2AAAjdUlEQVR42u2deZQV1b3nT3d1dXXvYVhGDIbB2GBhYJg0sXHh4wYgxpRLKk1iI1XjeIzRWMqYxJI0ljM2Tixj4qQxxhj7EMbG2AwbA8MgWQMG2Z1hUHdnd1dX6X3v7+csHd2NZBh3tvh8n7rV6ur7+vXqlfV8nnPuc4yRzA7W2AXAB4XCF88KJhlkdUXmAD72My5WnBXsYw9iLwPYhcBWAu7DDvYQQJwP6AjgT5EZQ3lC4Qrgd8C0iCKCvlzw+1CEJ+ygF/A/UYQn6mQ/xG4C/gT4A8D/wT8FDhT9D3gvwDPAe8N0W8BvQb4V8BbQfQZwL8A/Av4g+gzgH8BfAh4FvAn0GcA/wL4DPAE8C/QZwD/AngL8DTgN9BnAP8CeAvwNOA30GcA/wJ4C/A04DfQZwD/AngL8DTgN9BnAP8CeAvwNOA30GcA/wJ4C/A04DfQZwD/AngL8DTgN9BnAP8CeAvwNOA30GcA/wJ4C/A04DfQZwD/AngL8DTgN9BnAP8CeAvwNOA30GcA/wJ4C/A04DfQZwD/AngL8DTgN9BnAP8CeAvwNOA30GcA/wJ4C/A04DfQZwD/AngL8DTgN9BnAP8CeAvwNOA30GcA/wJ4C/A04DfQZwD/AngL8DTgN9BnAP8CeAvwNOA30GcA/wJ4C/A04DfQZwD/AngL8DTgN9BnAP8CeAvwNOA30GcA/wJ4C/A04DfQZwD/AngL8DTgN9BnAP8CeAvwNOA30GcA/wJ4C/A04DfQZwD/AngL8DTgN9BnAP8CeAvwNOA30GcA/wJ4C/A04DfQZwD/AngL8DTgN9BnAP8CeAvwNOA30GcA/wJ4C/A04DfQZwD/AngL8DTgN9BnAP8CeAvwNOA30GcA/wJ4C/A04DfQZwD/AngL8DTgN9BnAP8CeAvwNOA30GcA/wJ4C/A04DfQZwD/AngL8DTgN9BnAP8CeAvwNOA30GcA/wJ4C/A04DfQZwD/AngL8DTgN9BnAP8CeAvwNOA30GcA/wJ4C/A04DfQZwD/AngL8DTgN9BnAP8CeAvwNOA30GcA/wJ4C/A04DfQZwD/AngL8DTgN9BnAP8CeAvwNOA30GcA/wJ4C/A04DfQZwD/AngL8DTgN9BnAP8CeAvwNOA30GcA/wJ4C/A04DfQZwD/AngL8DTgN9BnAP8CeAvwNOA30GcA/wJ4C/A04DfQZwD/AngL8DTgN9BnAP8CeAvwNOA30GcA/wJ4C/A04DfQZwD/AngL8DTgN9BnAP8CeAvwNOA30GcA/wJ4C/A04DfQZwD/AngL8DTgN9BnAP8CeAvwNOA30GcA/wJ4C/A04DfQZwD/AngL8DTgN9BnAP8CeAvwNOA30GcA/wJ4C/A04DfQZwD/AngL8DTgN9BnAP8CeAvwNOA30GcA/wJ4C/A04DfQZwD/AngL8DTgN9BnAP8CeAvwNOA30GcA/wJ4C/A04DfQZwD/AngL8DTgN9BnAP8CeAvwNOA30GcA/wJ4C/A04DfQZwD/AngL8DTgN9BnAP8CeAvwNOCX2lWz3/cb4sAAAAASUVORK5CYII=";
 
-<style>
+const markets = [
+  { code: "USA", name: "United States" },
+  { code: "CAN", name: "Canada" },
+  { code: "UK", name: "United Kingdom" },
+  { code: "DE", name: "Germany" },
+  { code: "IN", name: "India" },
+];
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Poppins, sans-serif;
+const brands = [
+  {
+    name: "MasterMedi",
+    category: "Oral & Personal Care",
+    description:
+      "Everyday wellness products designed with better routines, cleaner details, and stronger consumer trust.",
+    logo: MASTERMEDI_LOGO,
+    glow: "from-orange-400/25 via-orange-500/10 to-transparent",
+  },
+  {
+    name: "KarmaPledge",
+    category: "Natural Stone Jewelry",
+    description:
+      "Meaningful handcrafted creations inspired by nature, intention, and artisanal storytelling.",
+    logo: KARMA_LOGO,
+    glow: "from-orange-300/20 via-amber-400/10 to-transparent",
+  },
+  {
+    name: "UrbanHut",
+    category: "Home Textiles",
+    description:
+      "Comfort-led home essentials created to blend quality, utility, and elevated everyday living.",
+    logo: URBANHUT_LOGO,
+    glow: "from-orange-500/18 via-rose-400/8 to-transparent",
+  },
+  {
+    name: "Luxeoria",
+    category: "Leather Goods",
+    description:
+      "Modern leather accessories shaped with timeless appeal, function, and fine material presence.",
+    logo: LUXEORIA_LOGO,
+    glow: "from-orange-200/18 via-orange-400/8 to-transparent",
+  },
+];
+
+const principles = [
+  {
+    title: "Build Distinct Brands",
+    description:
+      "Each category is developed with its own identity, positioning, and customer promise.",
+    icon: Layers3,
+  },
+  {
+    title: "Deliver Global Quality",
+    description:
+      "We align product thinking, packaging, and compliance for international markets from the start.",
+    icon: PackageCheck,
+  },
+  {
+    title: "Scale With Trust",
+    description:
+      "We grow through dependable execution, long-term relationships, and market-led decision making.",
+    icon: Handshake,
+  },
+];
+
+function LogoMark() {
+  return (
+    <div className="relative flex items-center gap-3">
+      <motion.div
+        initial={{ opacity: 0, scale: 0.9, rotate: -10 }}
+        animate={{ opacity: 1, scale: 1, rotate: 0 }}
+        transition={{ duration: 0.7 }}
+        className="relative flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-white/10 bg-white/5 shadow-[0_0_30px_rgba(249,115,22,0.18)] backdrop-blur-xl"
+      >
+        <img src={INDIVATION_EMBLEM} alt="Indivation emblem" className="h-9 w-9 object-contain" />
+      </motion.div>
+      <div>
+        <p className="text-[11px] uppercase tracking-[0.38em] text-white/45">Indivation Exports</p>
+        <p className="text-base font-semibold tracking-[0.2em] text-white">HOUSE OF BRANDS</p>
+      </div>
+    </div>
+  );
 }
 
-body{
-background:#ffffff;
-color:#111;
+function AmbientBackground() {
+  return (
+    <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden bg-neutral-950">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_15%_15%,rgba(249,115,22,0.15),transparent_25%),radial-gradient(circle_at_85%_18%,rgba(255,255,255,0.08),transparent_22%),radial-gradient(circle_at_50%_78%,rgba(251,146,60,0.10),transparent_25%),linear-gradient(180deg,#08080a_0%,#111111_48%,#08080a_100%)]" />
+
+      <motion.div
+        animate={{ x: [0, 30, 0], y: [0, -20, 0] }}
+        transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute left-[8%] top-[12%] h-72 w-72 rounded-full bg-orange-500/10 blur-3xl"
+      />
+      <motion.div
+        animate={{ x: [0, -25, 0], y: [0, 30, 0] }}
+        transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute right-[10%] top-[10%] h-80 w-80 rounded-full bg-orange-300/8 blur-3xl"
+      />
+      <motion.div
+        animate={{ x: [0, 20, 0], y: [0, 25, 0] }}
+        transition={{ duration: 16, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute bottom-[8%] left-[30%] h-96 w-96 rounded-full bg-orange-400/8 blur-3xl"
+      />
+
+      <div className="absolute inset-0 opacity-[0.07] [background-image:linear-gradient(rgba(255,255,255,0.7)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.7)_1px,transparent_1px)] [background-size:90px_90px]" />
+      <div className="absolute inset-0 backdrop-blur-[120px]" />
+    </div>
+  );
 }
 
-/* HEADER */
-
-header{
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:20px 80px;
-border-bottom:1px solid #eee;
+function SectionHeading({ eyebrow, title, description }) {
+  return (
+    <div className="max-w-3xl">
+      <p className="text-sm uppercase tracking-[0.32em] text-white/45">{eyebrow}</p>
+      <h3 className="mt-4 text-3xl font-semibold tracking-tight text-white md:text-4xl lg:text-5xl">
+        {title}
+      </h3>
+      {description ? (
+        <p className="mt-5 max-w-2xl text-base leading-7 text-white/65 md:text-lg">{description}</p>
+      ) : null}
+    </div>
+  );
 }
 
-.logo{
-font-size:22px;
-font-weight:600;
+function BrandLogo({ src, name }) {
+  const [hasError, setHasError] = React.useState(false);
+
+  return (
+    <div className="flex min-h-[116px] flex-col items-center justify-center rounded-[1.5rem] border border-white/10 bg-black/40 px-4 py-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)] backdrop-blur-xl">
+      {!hasError ? (
+        <img
+          src={src}
+          alt={`${name} logo`}
+          onError={() => setHasError(true)}
+          className="h-16 w-full object-contain opacity-100"
+        />
+      ) : (
+        <div className="flex h-16 w-full items-center justify-center text-center text-lg font-semibold uppercase tracking-[0.28em] text-white">
+          {name}
+        </div>
+      )}
+      <div className="mt-3 text-[11px] uppercase tracking-[0.26em] text-white/45">Brand Identity</div>
+    </div>
+  );
 }
 
-nav a{
-margin-left:30px;
-text-decoration:none;
-color:#000;
-font-weight:500;
+export default function IndivationExportsWebsite() {
+  return (
+    <div className="min-h-screen overflow-x-hidden text-white selection:bg-orange-300 selection:text-neutral-950">
+      <AmbientBackground />
+
+      <header className="sticky top-0 z-40 border-b border-white/10 bg-neutral-950/45 backdrop-blur-2xl">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-10">
+          <LogoMark />
+
+          <nav className="hidden items-center gap-8 text-sm text-white/70 md:flex">
+            <a href="#about" className="transition hover:text-white">Who We Are</a>
+            <a href="#brands" className="transition hover:text-white">Brands</a>
+            <a href="#how" className="transition hover:text-white">How We Do It</a>
+            <a href="#presence" className="transition hover:text-white">Global Presence</a>
+            <a href="#contact" className="transition hover:text-white">Contact</a>
+          </nav>
+
+          <Button
+            asChild
+            className="rounded-full border border-white/15 bg-white/8 px-5 text-white hover:bg-white/12"
+          >
+            <a href="#contact">Connect</a>
+          </Button>
+        </div>
+      </header>
+
+      <main>
+        <section className="mx-auto flex min-h-[92vh] max-w-7xl items-center px-6 py-16 lg:px-10">
+          <div className="grid items-center gap-14 lg:grid-cols-[1.02fr_0.98fr]">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              className="max-w-3xl"
+            >
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.15, duration: 0.7 }}
+                className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/6 px-4 py-2 text-sm text-white/75 backdrop-blur-xl"
+              >
+                <Sparkles className="h-4 w-4 text-orange-300" />
+                Building Indian brands for global consumers
+              </motion.div>
+
+              <h1 className="text-5xl font-semibold leading-[1.02] tracking-tight text-white md:text-6xl lg:text-7xl">
+                Indivation is a
+                <span className="bg-gradient-to-r from-orange-200 via-white to-orange-300 bg-clip-text text-transparent"> modern house of brands </span>
+                creating products for the world.
+              </h1>
+
+              <p className="mt-8 max-w-2xl text-lg leading-8 text-white/70 md:text-xl">
+                We build focused consumer brands across four categories and serve key markets including the USA, Canada, UK, Germany, and India.
+              </p>
+
+              <div className="mt-10 flex flex-wrap gap-3">
+                {markets.map((market, index) => (
+                  <motion.div
+                    key={market.code}
+                    initial={{ opacity: 0, y: 12 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.18 + index * 0.06, duration: 0.45 }}
+                    className="rounded-full border border-white/10 bg-white/6 px-4 py-2 text-sm text-white/85 backdrop-blur-xl"
+                  >
+                    {market.name}
+                  </motion.div>
+                ))}
+              </div>
+
+              <div className="mt-10 flex flex-wrap gap-4">
+                <Button asChild className="rounded-full bg-white px-6 text-neutral-950 hover:bg-white/90">
+                  <a href="#brands">
+                    Explore Our Brands <ArrowRight className="ml-2 h-4 w-4" />
+                  </a>
+                </Button>
+                <Button
+                  asChild
+                  variant="outline"
+                  className="rounded-full border-white/15 bg-white/5 px-6 text-white hover:bg-white/10"
+                >
+                  <a href="#contact">Contact Us</a>
+                </Button>
+              </div>
+
+              <motion.a
+                href="#about"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.6, duration: 0.5 }}
+                className="mt-12 inline-flex items-center gap-2 text-sm text-white/50 transition hover:text-white/80"
+              >
+                Scroll to discover
+                <ChevronDown className="h-4 w-4" />
+              </motion.a>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, scale: 0.96, y: 10 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              transition={{ duration: 0.85, delay: 0.1 }}
+              className="relative"
+            >
+              <motion.div
+                animate={{ rotate: [0, 8, 0], scale: [1, 1.03, 1] }}
+                transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+                className="absolute -left-6 top-6 h-32 w-32 rounded-full bg-orange-500/15 blur-3xl"
+              />
+              <motion.div
+                animate={{ rotate: [0, -8, 0], scale: [1, 1.04, 1] }}
+                transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+                className="absolute -right-4 bottom-8 h-36 w-36 rounded-full bg-orange-300/12 blur-3xl"
+              />
+
+              <Card className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.055] shadow-[0_25px_80px_rgba(0,0,0,0.45)] backdrop-blur-2xl">
+                <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(255,255,255,0.08),transparent_35%,transparent_65%,rgba(255,255,255,0.05))]" />
+                <CardContent className="relative p-8 md:p-10">
+                  <div className="flex items-center justify-between gap-4">
+                    <div className="flex items-center gap-3 text-white/70">
+                      <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-white/8">
+                        <img src={INDIVATION_EMBLEM} alt="Indivation emblem" className="h-7 w-7 object-contain" />
+                      </div>
+                      <div>
+                        <p className="text-xs uppercase tracking-[0.28em] text-white/45">Indivation</p>
+                        <p className="text-lg font-semibold text-white">Global House of Brands</p>
+                      </div>
+                    </div>
+                    <div className="rounded-full border border-orange-300/25 bg-orange-300/10 px-3 py-1 text-xs text-orange-100">
+                      Active Markets
+                    </div>
+                  </div>
+
+                  <div className="mt-8 grid gap-4 sm:grid-cols-2">
+                    {brands.map((brand, index) => (
+                      <motion.div
+                        key={brand.name}
+                        initial={{ opacity: 0, y: 18 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.2 + index * 0.08, duration: 0.45 }}
+                        whileHover={{ y: -4 }}
+                        className="group relative overflow-hidden rounded-3xl border border-white/10 bg-black/20 p-5"
+                      >
+                        <div className={`absolute inset-0 bg-gradient-to-br ${brand.glow} opacity-90`} />
+                        <div className="relative">
+                          <BrandLogo src={brand.logo} name={brand.name} />
+                          <p className="mt-4 text-sm text-white/55">{brand.category}</p>
+                        </div>
+                      </motion.div>
+                    ))}
+                  </div>
+
+                  <div className="mt-8 rounded-3xl border border-white/10 bg-white/5 p-5 backdrop-blur-xl">
+                    <div className="flex items-center gap-2 text-sm text-white/65">
+                      <MapPin className="h-4 w-4" />
+                      Built in India • Selling globally
+                    </div>
+                    <p className="mt-3 text-xl font-medium leading-8 text-white/90">
+                      From thoughtful product creation to cross-border execution, we build brands with global ambition and long-term intent.
+                    </p>
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
+          </div>
+        </section>
+
+        <section id="about" className="mx-auto max-w-7xl px-6 py-14 lg:px-10 lg:py-20">
+          <div className="grid gap-8 lg:grid-cols-[0.92fr_1.08fr]">
+            <SectionHeading
+              eyebrow="Who we are"
+              title="A focused export-led company designed as a house of brands."
+              description="We create and scale distinct consumer brands that combine category focus, market understanding, and reliable execution."
+            />
+
+            <div className="grid gap-5 md:grid-cols-2">
+              <motion.div whileHover={{ y: -4 }}>
+                <Card className="rounded-[1.85rem] border border-white/10 bg-white/6 backdrop-blur-2xl">
+                  <CardContent className="p-7">
+                    <p className="text-sm uppercase tracking-[0.24em] text-orange-200/80">What we do</p>
+                    <p className="mt-4 text-lg leading-8 text-white/80">
+                      We operate across four categories through dedicated brands, each created with a clear customer promise and product identity.
+                    </p>
+                  </CardContent>
+                </Card>
+              </motion.div>
+
+              <motion.div whileHover={{ y: -4 }}>
+                <Card className="rounded-[1.85rem] border border-white/10 bg-white/6 backdrop-blur-2xl">
+                  <CardContent className="p-7">
+                    <p className="text-sm uppercase tracking-[0.24em] text-orange-100/80">Why we exist</p>
+                    <p className="mt-4 text-lg leading-8 text-white/80">
+                      To build Indian-origin brands that can compete globally with stronger design, better quality, and deeper consumer relevance.
+                    </p>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
+        <section id="brands" className="mx-auto max-w-7xl px-6 py-14 lg:px-10 lg:py-20">
+          <div className="mb-12 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+            <SectionHeading
+              eyebrow="Our brands"
+              title="Four categories. Four distinct identities. One group vision."
+              description="Each brand has its own positioning and personality while being backed by the strength of Indivation."
+            />
+            <div className="rounded-full border border-white/10 bg-white/6 px-4 py-2 text-sm text-white/70 backdrop-blur-xl">
+              Unified logo treatment • same color • same scale
+            </div>
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+            {brands.map((brand, index) => (
+              <motion.div
+                key={brand.name}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                whileHover={{ y: -8 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.5, delay: index * 0.08 }}
+              >
+                <Card className="group relative h-full overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.045] shadow-[0_12px_50px_rgba(0,0,0,0.18)] transition duration-300 hover:border-white/15">
+                  <div className={`absolute inset-0 bg-gradient-to-br ${brand.glow} opacity-90`} />
+                  <CardContent className="relative flex h-full flex-col p-7">
+                    <BrandLogo src={brand.logo} name={brand.name} />
+                    <p className="mt-5 text-sm uppercase tracking-[0.22em] text-white/45">
+                      {brand.category}
+                    </p>
+                    <p className="mt-4 flex-1 text-base leading-7 text-white/72">
+                      {brand.description}
+                    </p>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
+        </section>
+
+        <section id="how" className="mx-auto max-w-7xl px-6 py-14 lg:px-10 lg:py-20">
+          <SectionHeading
+            eyebrow="How we do it"
+            title="We combine brand thinking, product execution, and export capability."
+            description="The model is simple: build clear brands, create dependable products, and scale in the right markets."
+          />
+
+          <div className="mt-12 grid gap-6 md:grid-cols-3">
+            {principles.map((item, index) => {
+              const Icon = item.icon;
+              return (
+                <motion.div
+                  key={item.title}
+                  initial={{ opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  whileHover={{ y: -5 }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{ duration: 0.5, delay: index * 0.08 }}
+                >
+                  <Card className="h-full rounded-[2rem] border border-white/10 bg-white/[0.05] backdrop-blur-2xl">
+                    <CardContent className="p-7">
+                      <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-white/10">
+                        <Icon className="h-5 w-5 text-orange-200" />
+                      </div>
+                      <h4 className="text-xl font-semibold text-white">{item.title}</h4>
+                      <p className="mt-4 text-base leading-7 text-white/70">{item.description}</p>
+                    </CardContent>
+                  </Card>
+                </motion.div>
+              );
+            })}
+          </div>
+        </section>
+
+        <section id="presence" className="mx-auto max-w-7xl px-6 py-14 lg:px-10 lg:py-20">
+          <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
+            <SectionHeading
+              eyebrow="Global presence"
+              title="Selling across key international markets with an India-first foundation."
+              description="Our footprint reflects the way we think: focused categories, export-ready operations, and long-term brand building."
+            />
+
+            <Card className="overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.05] backdrop-blur-2xl">
+              <CardContent className="p-8">
+                <div className="grid gap-4 sm:grid-cols-2">
+                  {markets.map((market, index) => (
+                    <motion.div
+                      key={market.code}
+                      initial={{ opacity: 0, x: 12 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true, amount: 0.2 }}
+                      transition={{ duration: 0.45, delay: index * 0.07 }}
+                      className="rounded-2xl border border-white/10 bg-black/20 p-5"
+                    >
+                      <p className="text-xs uppercase tracking-[0.24em] text-white/45">Market</p>
+                      <p className="mt-2 text-xl font-semibold text-white">{market.name}</p>
+                    </motion.div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </section>
+
+        <section id="contact" className="mx-auto max-w-7xl px-6 pb-20 pt-8 lg:px-10 lg:pb-24">
+          <motion.div whileHover={{ y: -4 }}>
+            <Card className="overflow-hidden rounded-[2.2rem] border border-white/10 bg-[linear-gradient(135deg,rgba(10,10,10,0.96),rgba(18,18,18,0.94),rgba(249,115,22,0.08),rgba(10,10,10,0.96))] shadow-[0_20px_80px_rgba(0,0,0,0.45)]">
+              <CardContent className="relative grid gap-8 p-8 md:p-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+                <div className="absolute -right-12 top-0 h-40 w-40 rounded-full bg-orange-500/8 blur-3xl" />
+                <div className="absolute bottom-0 left-0 h-44 w-44 rounded-full bg-orange-400/8 blur-3xl" />
+
+                <div className="relative max-w-2xl">
+                  <div className="mb-5 flex items-center gap-4">
+                    <div className="flex h-14 w-14 items-center justify-center rounded-2xl border border-white/10 bg-white/8">
+                      <img src={INDIVATION_EMBLEM} alt="Indivation emblem" className="h-10 w-10 object-contain" />
+                    </div>
+                    <div>
+                      <p className="text-sm uppercase tracking-[0.3em] text-white/45">Contact</p>
+                      <h3 className="mt-1 text-3xl font-semibold tracking-tight text-white md:text-4xl">
+                        Indivation Exports Private Limited
+                      </h3>
+                    </div>
+                  </div>
+
+                  <p className="text-base leading-7 text-white/70">
+                    Quietly building brands. Confidently selling to the world.
+                  </p>
+                </div>
+
+                <div className="relative rounded-[1.8rem] border border-white/10 bg-black/45 p-6 backdrop-blur-xl">
+                  <div className="flex items-start gap-3">
+                    <MapPin className="mt-1 h-5 w-5 text-orange-200" />
+                    <div className="text-white/85">
+                      <p className="text-lg font-medium">59B, Pace City I, Sector 37</p>
+                      <p className="mt-2 text-base text-white/70">Gurgaon 122004 (HR) India</p>
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </motion.div>
+        </section>
+      </main>
+    </div>
+  );
 }
-
-/* HERO */
-
-.hero{
-height:90vh;
-display:flex;
-align-items:center;
-justify-content:center;
-text-align:center;
-background:#f7f7f7;
-}
-
-.hero h1{
-font-size:48px;
-margin-bottom:20px;
-}
-
-.hero p{
-font-size:18px;
-color:#555;
-margin-bottom:30px;
-}
-
-.btn{
-padding:12px 28px;
-background:black;
-color:white;
-text-decoration:none;
-}
-
-/* BRANDS */
-
-.section{
-padding:80px;
-text-align:center;
-}
-
-.brand-grid{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:30px;
-margin-top:40px;
-}
-
-.brand-card{
-border:1px solid #eee;
-padding:30px;
-transition:0.3s;
-}
-
-.brand-card:hover{
-box-shadow:0 10px 30px rgba(0,0,0,0.1);
-}
-
-/* PRODUCTS */
-
-.product-grid{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:30px;
-margin-top:40px;
-}
-
-.product{
-border:1px solid #eee;
-padding:20px;
-}
-
-.product img{
-width:100%;
-height:200px;
-object-fit:cover;
-}
-
-/* TESTIMONIAL */
-
-.testimonial{
-background:#f5f5f5;
-padding:80px;
-text-align:center;
-}
-
-.testimonial p{
-max-width:700px;
-margin:auto;
-font-size:18px;
-}
-
-/* FOOTER */
-
-footer{
-background:#000;
-color:#fff;
-padding:40px;
-text-align:center;
-}
-
-footer p{
-opacity:0.8;
-}
-
-</style>
-
-</head>
-
-<body>
-
-<header>
-<div class="logo">Indivation Exports</div>
-<nav>
-<a href="#">Home</a>
-<a href="#">Brands</a>
-<a href="#">Products</a>
-<a href="#">About</a>
-<a href="#">Contact</a>
-</nav>
-</header>
-
-<section class="hero">
-<div>
-<h1>Global Brands by Indivation Exports</h1>
-<p>Delivering premium wellness, lifestyle and personal care products worldwide</p>
-<a class="btn">Explore Products</a>
-</div>
-</section>
-
-<section class="section">
-<h2>Our Brands</h2>
-
-<div class="brand-grid">
-
-<div class="brand-card">
-<h3>MasterMedi</h3>
-<p>Healthcare & wellness products</p>
-</div>
-
-<div class="brand-card">
-<h3>Karma Pledge</h3>
-<p>Sustainable lifestyle products</p>
-</div>
-
-<div class="brand-card">
-<h3>LushLuxeoria</h3>
-<p>Premium leather accessories</p>
-</div>
-
-<div class="brand-card">
-<h3>Urban Hut</h3>
-<p>Modern home & travel essentials</p>
-</div>
-
-</div>
-</section>
-
-
-<section class="section">
-<h2>Featured Products</h2>
-
-<div class="product-grid">
-
-<div class="product">
-<img src="https://images.unsplash.com/photo-1600185365483-26d7a4cc7519">
-<h4>Leather Messenger Bag</h4>
-</div>
-
-<div class="product">
-<img src="https://images.unsplash.com/photo-1606813909024-03a8a2a8f5d1">
-<h4>Herbal Tongue Cleaner</h4>
-</div>
-
-<div class="product">
-<img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f">
-<h4>Travel Toiletry Kit</h4>
-</div>
-
-</div>
-</section>
-
-
-<section class="testimonial">
-<h2>Trusted Worldwide</h2>
-<p>
-Indivation Exports delivers high-quality products across multiple global markets
-including USA, UK, Germany and Canada.
-</p>
-</section>
-
-<section class="section">
-<h2>About Us</h2>
-<p style="max-width:700px;margin:auto">
-Indivation Exports Pvt Ltd is a global exporter and brand owner specializing
-in premium lifestyle, wellness, and personal care products designed for
-international markets.
-</p>
-</section>
-
-<footer>
-<p>© 2026 Indivation Exports Pvt Ltd</p>
-</footer>
-
-</body>
-</html>
