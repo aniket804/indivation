@@ -1,158 +1,2533 @@
-import React, { useEffect } from "react";
+<!DOCTYPE html>
 
-// React version of the static page so it compiles correctly in the canvas
-export default function IndivationExportsWebsite() {
+<html lang="en">
 
-  // simple runtime checks (acts like lightweight tests)
-  useEffect(() => {
-    const requiredSections = ["brands", "contact"];
+<head>
 
-    requiredSections.forEach((id) => {
-      const el = document.getElementById(id);
-      if (!el) {
-        console.error("Missing section:", id);
-      } else {
-        console.log("Section loaded:", id);
+  <meta charset="UTF-8" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Indivation Exports Private Limited | House of Brands</title>
+
+  <meta
+
+    name="description"
+
+    content="Indivation Exports Private Limited is a house of brands from India, building and selling focused consumer brands globally across oral care, jewelry, home textiles, and leather goods."
+
+  />
+
+
+
+  <!--
+
+    GitHub Pages setup:
+
+    1) Save this file as: index.html
+
+    2) Create a folder named: assets
+
+    3) Put your logo files inside assets with these exact names:
+
+       - indivation-logo.png
+
+       - mastermedi.png
+
+       - karmapledge.png
+
+       - urbanhut.png
+
+       - luxeoria.png
+
+  -->
+
+
+
+  <style>
+
+    :root {
+
+      --bg: #080808;
+
+      --bg-soft: #111111;
+
+      --card: rgba(255, 255, 255, 0.05);
+
+      --card-strong: rgba(255, 255, 255, 0.08);
+
+      --stroke: rgba(255, 255, 255, 0.10);
+
+      --text: #ffffff;
+
+      --muted: rgba(255, 255, 255, 0.70);
+
+      --soft: rgba(255, 255, 255, 0.48);
+
+      --accent: #f97316;
+
+      --accent-soft: #fdba74;
+
+      --shadow: 0 20px 80px rgba(0, 0, 0, 0.35);
+
+      --radius-xl: 32px;
+
+      --radius-lg: 24px;
+
+      --radius-md: 18px;
+
+      --max: 1240px;
+
+      --header-h: 86px;
+
+    }
+
+
+
+    * { box-sizing: border-box; }
+
+
+
+    html { scroll-behavior: smooth; }
+
+
+
+    body {
+
+      margin: 0;
+
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+      color: var(--text);
+
+      background:
+
+        radial-gradient(circle at 15% 15%, rgba(249,115,22,0.15), transparent 25%),
+
+        radial-gradient(circle at 85% 18%, rgba(255,255,255,0.07), transparent 22%),
+
+        radial-gradient(circle at 50% 78%, rgba(251,146,60,0.10), transparent 25%),
+
+        linear-gradient(180deg, #08080a 0%, #111111 48%, #08080a 100%);
+
+      min-height: 100vh;
+
+      overflow-x: hidden;
+
+    }
+
+
+
+    body::before {
+
+      content: "";
+
+      position: fixed;
+
+      inset: 0;
+
+      background-image:
+
+        linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
+
+        linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+
+      background-size: 90px 90px;
+
+      opacity: 0.28;
+
+      pointer-events: none;
+
+      z-index: -2;
+
+    }
+
+
+
+    body::after {
+
+      content: "";
+
+      position: fixed;
+
+      inset: 0;
+
+      backdrop-filter: blur(90px);
+
+      -webkit-backdrop-filter: blur(90px);
+
+      pointer-events: none;
+
+      z-index: -1;
+
+    }
+
+
+
+    .blob {
+
+      position: fixed;
+
+      border-radius: 999px;
+
+      filter: blur(70px);
+
+      opacity: 0.45;
+
+      pointer-events: none;
+
+      z-index: -1;
+
+      animation: floatBlob 14s ease-in-out infinite;
+
+    }
+
+
+
+    .blob-1 {
+
+      width: 320px;
+
+      height: 320px;
+
+      background: rgba(249, 115, 22, 0.16);
+
+      left: 6%;
+
+      top: 10%;
+
+    }
+
+
+
+    .blob-2 {
+
+      width: 360px;
+
+      height: 360px;
+
+      background: rgba(253, 186, 116, 0.12);
+
+      right: 8%;
+
+      top: 12%;
+
+      animation-duration: 16s;
+
+    }
+
+
+
+    .blob-3 {
+
+      width: 420px;
+
+      height: 420px;
+
+      background: rgba(251, 146, 60, 0.10);
+
+      left: 28%;
+
+      bottom: 2%;
+
+      animation-duration: 18s;
+
+    }
+
+
+
+    @keyframes floatBlob {
+
+      0%, 100% { transform: translate3d(0,0,0) scale(1); }
+
+      50% { transform: translate3d(18px,-24px,0) scale(1.04); }
+
+    }
+
+
+
+    img { max-width: 100%; display: block; }
+
+    a { color: inherit; text-decoration: none; }
+
+    button { font: inherit; }
+
+
+
+    .container {
+
+      width: min(var(--max), calc(100% - 32px));
+
+      margin: 0 auto;
+
+    }
+
+
+
+    .site-header {
+
+      position: sticky;
+
+      top: 0;
+
+      z-index: 50;
+
+      height: var(--header-h);
+
+      display: flex;
+
+      align-items: center;
+
+      border-bottom: 1px solid var(--stroke);
+
+      background: rgba(8, 8, 8, 0.55);
+
+      backdrop-filter: blur(20px);
+
+      -webkit-backdrop-filter: blur(20px);
+
+    }
+
+
+
+    .header-inner {
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      gap: 20px;
+
+    }
+
+
+
+    .brand-lockup {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 14px;
+
+      min-width: 0;
+
+    }
+
+
+
+    .brand-lockup img {
+
+      height: 54px;
+
+      width: auto;
+
+      object-fit: contain;
+
+    }
+
+
+
+    .brand-copy {
+
+      min-width: 0;
+
+    }
+
+
+
+    .brand-copy small {
+
+      display: block;
+
+      color: var(--soft);
+
+      font-size: 11px;
+
+      letter-spacing: 0.36em;
+
+      text-transform: uppercase;
+
+      margin-bottom: 4px;
+
+    }
+
+
+
+    .brand-copy span {
+
+      display: block;
+
+      font-size: 14px;
+
+      font-weight: 600;
+
+      letter-spacing: 0.22em;
+
+      text-transform: uppercase;
+
+      white-space: nowrap;
+
+    }
+
+
+
+    .desktop-nav {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 26px;
+
+    }
+
+
+
+    .desktop-nav a {
+
+      color: var(--muted);
+
+      font-size: 14px;
+
+      transition: color 0.25s ease;
+
+    }
+
+
+
+    .desktop-nav a:hover,
+
+    .desktop-nav a.active {
+
+      color: #fff;
+
+    }
+
+
+
+    .header-actions {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 12px;
+
+    }
+
+
+
+    .menu-toggle {
+
+      display: none;
+
+      width: 46px;
+
+      height: 46px;
+
+      border: 1px solid var(--stroke);
+
+      background: rgba(255,255,255,0.06);
+
+      color: #fff;
+
+      border-radius: 999px;
+
+      cursor: pointer;
+
+    }
+
+
+
+    .btn {
+
+      display: inline-flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      gap: 10px;
+
+      border-radius: 999px;
+
+      padding: 14px 22px;
+
+      font-size: 14px;
+
+      font-weight: 600;
+
+      transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+
+      border: 1px solid transparent;
+
+      cursor: pointer;
+
+    }
+
+
+
+    .btn:hover { transform: translateY(-2px); }
+
+
+
+    .btn-primary {
+
+      background: #fff;
+
+      color: #111;
+
+    }
+
+
+
+    .btn-secondary {
+
+      background: rgba(255,255,255,0.05);
+
+      border-color: rgba(255,255,255,0.12);
+
+      color: #fff;
+
+    }
+
+
+
+    .btn-secondary:hover,
+
+    .menu-toggle:hover {
+
+      background: rgba(255,255,255,0.10);
+
+    }
+
+
+
+    .mobile-panel {
+
+      display: none;
+
+      position: absolute;
+
+      top: calc(var(--header-h) - 4px);
+
+      left: 16px;
+
+      right: 16px;
+
+      background: rgba(10,10,10,0.95);
+
+      border: 1px solid var(--stroke);
+
+      border-radius: 24px;
+
+      padding: 14px;
+
+      box-shadow: var(--shadow);
+
+      backdrop-filter: blur(20px);
+
+      -webkit-backdrop-filter: blur(20px);
+
+    }
+
+
+
+    .mobile-panel.open { display: block; }
+
+
+
+    .mobile-panel a {
+
+      display: block;
+
+      padding: 12px 10px;
+
+      color: var(--muted);
+
+      border-radius: 12px;
+
+    }
+
+
+
+    .mobile-panel a:hover {
+
+      background: rgba(255,255,255,0.05);
+
+      color: #fff;
+
+    }
+
+
+
+    main { padding-bottom: 60px; }
+
+
+
+    .hero {
+
+      min-height: calc(100vh - var(--header-h));
+
+      display: grid;
+
+      align-items: center;
+
+      padding: 48px 0 56px;
+
+    }
+
+
+
+    .hero-grid {
+
+      display: grid;
+
+      grid-template-columns: 1.02fr 0.98fr;
+
+      gap: 48px;
+
+      align-items: center;
+
+    }
+
+
+
+    .eyebrow-pill {
+
+      display: inline-flex;
+
+      align-items: center;
+
+      gap: 10px;
+
+      padding: 10px 16px;
+
+      border-radius: 999px;
+
+      border: 1px solid var(--stroke);
+
+      background: rgba(255,255,255,0.06);
+
+      color: rgba(255,255,255,0.80);
+
+      backdrop-filter: blur(14px);
+
+      -webkit-backdrop-filter: blur(14px);
+
+      margin-bottom: 22px;
+
+      font-size: 14px;
+
+    }
+
+
+
+    .spark {
+
+      width: 9px;
+
+      height: 9px;
+
+      border-radius: 999px;
+
+      background: linear-gradient(135deg, var(--accent-soft), var(--accent));
+
+      box-shadow: 0 0 20px rgba(249,115,22,0.55);
+
+    }
+
+
+
+    h1 {
+
+      font-size: clamp(44px, 7vw, 82px);
+
+      line-height: 0.98;
+
+      margin: 0;
+
+      letter-spacing: -0.05em;
+
+    }
+
+
+
+    .gradient-text {
+
+      background: linear-gradient(90deg, #fed7aa 0%, #ffffff 50%, #fdba74 100%);
+
+      -webkit-background-clip: text;
+
+      background-clip: text;
+
+      color: transparent;
+
+    }
+
+
+
+    .lead {
+
+      margin: 26px 0 0;
+
+      max-width: 720px;
+
+      font-size: clamp(17px, 2vw, 21px);
+
+      line-height: 1.7;
+
+      color: var(--muted);
+
+    }
+
+
+
+    .pill-list {
+
+      display: flex;
+
+      flex-wrap: wrap;
+
+      gap: 12px;
+
+      margin-top: 30px;
+
+    }
+
+
+
+    .pill {
+
+      padding: 11px 16px;
+
+      border-radius: 999px;
+
+      border: 1px solid var(--stroke);
+
+      background: rgba(255,255,255,0.06);
+
+      color: rgba(255,255,255,0.88);
+
+      font-size: 14px;
+
+      backdrop-filter: blur(12px);
+
+      -webkit-backdrop-filter: blur(12px);
+
+    }
+
+
+
+    .cta-row {
+
+      display: flex;
+
+      flex-wrap: wrap;
+
+      gap: 14px;
+
+      margin-top: 30px;
+
+    }
+
+
+
+    .scroll-link {
+
+      display: inline-flex;
+
+      align-items: center;
+
+      gap: 8px;
+
+      margin-top: 28px;
+
+      color: var(--soft);
+
+      font-size: 14px;
+
+    }
+
+
+
+    .hero-card,
+
+    .card,
+
+    .contact-card {
+
+      position: relative;
+
+      overflow: hidden;
+
+      border: 1px solid var(--stroke);
+
+      border-radius: var(--radius-xl);
+
+      background: rgba(255,255,255,0.055);
+
+      box-shadow: var(--shadow);
+
+      backdrop-filter: blur(22px);
+
+      -webkit-backdrop-filter: blur(22px);
+
+    }
+
+
+
+    .hero-card {
+
+      padding: 32px;
+
+      background: rgba(255,255,255,0.06);
+
+    }
+
+
+
+    .hero-card::before,
+
+    .card::before {
+
+      content: "";
+
+      position: absolute;
+
+      inset: 0;
+
+      background: linear-gradient(135deg, rgba(255,255,255,0.08), transparent 34%, transparent 68%, rgba(255,255,255,0.05));
+
+      pointer-events: none;
+
+    }
+
+
+
+    .hero-top {
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      gap: 16px;
+
+      position: relative;
+
+      z-index: 1;
+
+    }
+
+
+
+    .hero-top-left {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 14px;
+
+    }
+
+
+
+    .hero-mini-logo {
+
+      width: 48px;
+
+      height: 48px;
+
+      border-radius: 18px;
+
+      border: 1px solid var(--stroke);
+
+      background: rgba(255,255,255,0.08);
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+    }
+
+
+
+    .hero-mini-logo img {
+
+      width: 28px;
+
+      height: 28px;
+
+      object-fit: contain;
+
+    }
+
+
+
+    .hero-top small,
+
+    .card-eyebrow,
+
+    .section-eyebrow,
+
+    .market-label,
+
+    .mini-label {
+
+      text-transform: uppercase;
+
+      letter-spacing: 0.28em;
+
+      font-size: 11px;
+
+      color: var(--soft);
+
+    }
+
+
+
+    .status-pill {
+
+      border: 1px solid rgba(253,186,116,0.28);
+
+      background: rgba(253,186,116,0.10);
+
+      color: #ffedd5;
+
+      border-radius: 999px;
+
+      padding: 7px 12px;
+
+      font-size: 12px;
+
+      white-space: nowrap;
+
+    }
+
+
+
+    .brand-preview-grid,
+
+    .brands-grid,
+
+    .how-grid,
+
+    .market-grid,
+
+    .about-grid {
+
+      display: grid;
+
+      gap: 24px;
+
+    }
+
+
+
+    .brand-preview-grid {
+
+      margin-top: 28px;
+
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+
+      position: relative;
+
+      z-index: 1;
+
+    }
+
+
+
+    .brand-preview-card,
+
+    .brand-card,
+
+    .principle-card,
+
+    .market-card,
+
+    .about-card {
+
+      position: relative;
+
+      overflow: hidden;
+
+      border: 1px solid var(--stroke);
+
+      background: rgba(0,0,0,0.22);
+
+      border-radius: 26px;
+
+      padding: 20px;
+
+      transition: transform 0.28s ease, border-color 0.28s ease, background 0.28s ease;
+
+    }
+
+
+
+    .brand-preview-card:hover,
+
+    .brand-card:hover,
+
+    .principle-card:hover,
+
+    .about-card:hover,
+
+    .market-card:hover {
+
+      transform: translateY(-6px);
+
+      border-color: rgba(255,255,255,0.16);
+
+    }
+
+
+
+    .brand-preview-card::after,
+
+    .brand-card::after {
+
+      content: "";
+
+      position: absolute;
+
+      inset: 0;
+
+      opacity: 0.9;
+
+      pointer-events: none;
+
+    }
+
+
+
+    .brand-preview-card.orange::after,
+
+    .brand-card.orange::after {
+
+      background: linear-gradient(135deg, rgba(249,115,22,0.18), rgba(249,115,22,0.04), transparent 70%);
+
+    }
+
+
+
+    .brand-preview-card.soft::after,
+
+    .brand-card.soft::after {
+
+      background: linear-gradient(135deg, rgba(253,186,116,0.16), rgba(251,146,60,0.05), transparent 70%);
+
+    }
+
+
+
+    .brand-logo-box {
+
+      position: relative;
+
+      z-index: 1;
+
+      min-height: 118px;
+
+      display: flex;
+
+      flex-direction: column;
+
+      align-items: center;
+
+      justify-content: center;
+
+      padding: 18px;
+
+      background: rgba(0,0,0,0.40);
+
+      border: 1px solid var(--stroke);
+
+      border-radius: 22px;
+
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
+
+    }
+
+
+
+    .brand-logo-box img {
+
+      width: 100%;
+
+      height: 64px;
+
+      object-fit: contain;
+
+      filter: brightness(0) invert(1);
+
+      opacity: 0.96;
+
+    }
+
+
+
+    .brand-logo-box strong {
+
+      display: none;
+
+      font-size: 18px;
+
+      font-weight: 700;
+
+      letter-spacing: 0.18em;
+
+      text-transform: uppercase;
+
+      text-align: center;
+
+    }
+
+
+
+    .brand-logo-box.is-fallback img { display: none; }
+
+    .brand-logo-box.is-fallback strong { display: block; }
+
+
+
+    .brand-logo-box span {
+
+      margin-top: 12px;
+
+      font-size: 11px;
+
+      letter-spacing: 0.24em;
+
+      text-transform: uppercase;
+
+      color: var(--soft);
+
+    }
+
+
+
+    .hero-note {
+
+      position: relative;
+
+      z-index: 1;
+
+      margin-top: 26px;
+
+      padding: 20px;
+
+      border-radius: 24px;
+
+      border: 1px solid var(--stroke);
+
+      background: rgba(255,255,255,0.05);
+
+    }
+
+
+
+    .hero-note p {
+
+      margin: 10px 0 0;
+
+      font-size: 20px;
+
+      line-height: 1.6;
+
+      color: rgba(255,255,255,0.92);
+
+    }
+
+
+
+    section { padding: 56px 0; }
+
+
+
+    .section-head {
+
+      display: flex;
+
+      flex-wrap: wrap;
+
+      align-items: end;
+
+      justify-content: space-between;
+
+      gap: 18px;
+
+      margin-bottom: 26px;
+
+    }
+
+
+
+    .section-head p,
+
+    .section-text {
+
+      margin: 18px 0 0;
+
+      color: var(--muted);
+
+      line-height: 1.8;
+
+      font-size: 17px;
+
+      max-width: 780px;
+
+    }
+
+
+
+    h2 {
+
+      margin: 16px 0 0;
+
+      font-size: clamp(34px, 4.5vw, 58px);
+
+      line-height: 1.04;
+
+      letter-spacing: -0.04em;
+
+    }
+
+
+
+    .about-wrap {
+
+      display: grid;
+
+      grid-template-columns: 0.92fr 1.08fr;
+
+      gap: 28px;
+
+      align-items: start;
+
+    }
+
+
+
+    .about-grid {
+
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    }
+
+
+
+    .about-card h3,
+
+    .principle-card h3,
+
+    .brand-card h3,
+
+    .market-card h3 {
+
+      margin: 0;
+
+      font-size: 22px;
+
+    }
+
+
+
+    .about-card p,
+
+    .principle-card p,
+
+    .brand-card p,
+
+    .market-card p,
+
+    .contact-text,
+
+    .address-card p {
+
+      margin: 14px 0 0;
+
+      color: var(--muted);
+
+      line-height: 1.8;
+
+    }
+
+
+
+    .brands-grid {
+
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+
+    }
+
+
+
+    .brand-card {
+
+      min-height: 100%;
+
+      padding: 24px;
+
+      background: rgba(255,255,255,0.045);
+
+    }
+
+
+
+    .brand-card .category {
+
+      margin-top: 18px;
+
+      color: var(--soft);
+
+      text-transform: uppercase;
+
+      letter-spacing: 0.22em;
+
+      font-size: 12px;
+
+    }
+
+
+
+    .how-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+    .market-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+
+
+    .icon-badge {
+
+      width: 52px;
+
+      height: 52px;
+
+      border-radius: 18px;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      background: rgba(255,255,255,0.09);
+
+      border: 1px solid var(--stroke);
+
+      color: #fed7aa;
+
+    }
+
+
+
+    .icon-badge svg,
+
+    .inline-icon svg {
+
+      width: 22px;
+
+      height: 22px;
+
+    }
+
+
+
+    .presence-wrap {
+
+      display: grid;
+
+      grid-template-columns: 0.95fr 1.05fr;
+
+      gap: 28px;
+
+      align-items: center;
+
+    }
+
+
+
+    .contact-card {
+
+      background: linear-gradient(135deg, rgba(10,10,10,0.96), rgba(18,18,18,0.94), rgba(249,115,22,0.08), rgba(10,10,10,0.96));
+
+      padding: 32px;
+
+    }
+
+
+
+    .contact-card::before {
+
+      content: "";
+
+      position: absolute;
+
+      width: 180px;
+
+      height: 180px;
+
+      border-radius: 999px;
+
+      right: -40px;
+
+      top: -20px;
+
+      background: rgba(249,115,22,0.08);
+
+      filter: blur(60px);
+
+    }
+
+
+
+    .contact-card::after {
+
+      content: "";
+
+      position: absolute;
+
+      width: 180px;
+
+      height: 180px;
+
+      border-radius: 999px;
+
+      left: -20px;
+
+      bottom: -40px;
+
+      background: rgba(251,146,60,0.08);
+
+      filter: blur(60px);
+
+    }
+
+
+
+    .contact-grid {
+
+      position: relative;
+
+      z-index: 1;
+
+      display: grid;
+
+      grid-template-columns: 1.1fr 0.9fr;
+
+      gap: 28px;
+
+      align-items: center;
+
+    }
+
+
+
+    .contact-head {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 16px;
+
+      margin-bottom: 18px;
+
+    }
+
+
+
+    .contact-head img {
+
+      width: 56px;
+
+      height: 56px;
+
+      object-fit: contain;
+
+      border-radius: 18px;
+
+      padding: 8px;
+
+      background: rgba(255,255,255,0.08);
+
+      border: 1px solid var(--stroke);
+
+    }
+
+
+
+    .contact-head h2 {
+
+      font-size: clamp(28px, 4vw, 42px);
+
+      margin: 6px 0 0;
+
+    }
+
+
+
+    .address-card {
+
+      border: 1px solid var(--stroke);
+
+      background: rgba(0,0,0,0.42);
+
+      border-radius: 26px;
+
+      padding: 24px;
+
+    }
+
+
+
+    .inline-icon {
+
+      display: inline-flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      color: #fed7aa;
+
+      margin-right: 10px;
+
+      vertical-align: middle;
+
+    }
+
+
+
+    .address-card strong {
+
+      display: block;
+
+      font-size: 20px;
+
+      line-height: 1.45;
+
+      margin-top: 6px;
+
+    }
+
+
+
+    .reveal {
+
+      opacity: 0;
+
+      transform: translateY(28px);
+
+      transition: opacity 0.75s ease, transform 0.75s ease;
+
+    }
+
+
+
+    .reveal.is-visible {
+
+      opacity: 1;
+
+      transform: translateY(0);
+
+    }
+
+
+
+    @media (max-width: 1120px) {
+
+      .hero-grid,
+
+      .about-wrap,
+
+      .presence-wrap,
+
+      .contact-grid {
+
+        grid-template-columns: 1fr;
+
       }
-    });
-  }, []);
 
-  return (
-    <div style={{ background: "#000", color: "#fff", minHeight: "100vh", fontFamily: "system-ui,-apple-system,sans-serif" }}>
 
-      {/* HERO */}
-      <section style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", padding: "24px", textAlign: "center" }}>
-        <div style={{ maxWidth: "900px" }}>
 
-          <div style={{ border: "1px solid rgba(255,255,255,0.2)", padding: "8px 16px", borderRadius: "999px", display: "inline-block", marginBottom: "20px", fontSize: "14px" }}>
+      .brands-grid {
+
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+
+      }
+
+    }
+
+
+
+    @media (max-width: 860px) {
+
+      :root { --header-h: 78px; }
+
+
+
+      .desktop-nav,
+
+      .header-actions .btn-secondary {
+
+        display: none;
+
+      }
+
+
+
+      .menu-toggle { display: inline-flex; align-items: center; justify-content: center; }
+
+      .mobile-panel { display: none; }
+
+
+
+      .brand-copy span,
+
+      .brand-copy small {
+
+        display: none;
+
+      }
+
+
+
+      .brand-lockup img { height: 44px; }
+
+
+
+      .hero-grid,
+
+      .brand-preview-grid,
+
+      .about-grid,
+
+      .how-grid,
+
+      .market-grid,
+
+      .brands-grid {
+
+        grid-template-columns: 1fr;
+
+      }
+
+
+
+      .hero-card,
+
+      .contact-card,
+
+      .brand-card,
+
+      .principle-card,
+
+      .about-card,
+
+      .market-card { padding: 22px; }
+
+
+
+      .hero-top {
+
+        flex-direction: column;
+
+        align-items: start;
+
+      }
+
+    }
+
+
+
+    @media (max-width: 560px) {
+
+      .container { width: min(var(--max), calc(100% - 20px)); }
+
+      h1 { font-size: 40px; }
+
+      h2 { font-size: 32px; }
+
+      .cta-row { flex-direction: column; }
+
+      .btn { width: 100%; }
+
+      .site-header { height: auto; padding: 14px 0; }
+
+      .mobile-panel { top: 76px; left: 10px; right: 10px; }
+
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+  <div class="blob blob-1"></div>
+
+  <div class="blob blob-2"></div>
+
+  <div class="blob blob-3"></div>
+
+
+
+  <header class="site-header">
+
+    <div class="container header-inner">
+
+      <a href="#top" class="brand-lockup" aria-label="Indivation home">
+
+        <img src="assets/indivation-logo.png" alt="Indivation Exports Private Limited" />
+
+        <div class="brand-copy">
+
+          <small>Indivation Exports</small>
+
+          <span>House of Brands</span>
+
+        </div>
+
+      </a>
+
+
+
+      <nav class="desktop-nav" aria-label="Main navigation">
+
+        <a href="#about">Who We Are</a>
+
+        <a href="#brands">Brands</a>
+
+        <a href="#how">How We Do It</a>
+
+        <a href="#presence">Global Presence</a>
+
+        <a href="#contact">Contact</a>
+
+      </nav>
+
+
+
+      <div class="header-actions">
+
+        <a class="btn btn-secondary" href="#contact">Connect</a>
+
+        <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="mobilePanel" aria-label="Open menu">
+
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+
+            <path d="M4 7h16"></path>
+
+            <path d="M4 12h16"></path>
+
+            <path d="M4 17h16"></path>
+
+          </svg>
+
+        </button>
+
+      </div>
+
+
+
+      <div class="mobile-panel" id="mobilePanel">
+
+        <a href="#about">Who We Are</a>
+
+        <a href="#brands">Brands</a>
+
+        <a href="#how">How We Do It</a>
+
+        <a href="#presence">Global Presence</a>
+
+        <a href="#contact">Contact</a>
+
+      </div>
+
+    </div>
+
+  </header>
+
+
+
+  <main id="top">
+
+    <section class="hero container">
+
+      <div class="hero-grid">
+
+        <div class="reveal is-visible">
+
+          <div class="eyebrow-pill">
+
+            <span class="spark"></span>
+
             Building Indian brands for global consumers
+
           </div>
 
-          <h1 style={{ fontSize: "52px", fontWeight: "700", lineHeight: "1.2" }}>
-            Indivation is a <span style={{ color: "#facc15" }}>modern house of brands</span> creating products for the world
+
+
+          <h1>
+
+            Indivation is a
+
+            <span class="gradient-text"> modern house of brands </span>
+
+            creating products for the world.
+
           </h1>
 
-          <p style={{ marginTop: "20px", fontSize: "18px", color: "#d1d5db" }}>
-            Indivation Exports Pvt Ltd develops and scales consumer brands across global ecommerce marketplaces including the United States, United Kingdom, Germany, Canada and India.
+
+
+          <p class="lead">
+
+            We build focused consumer brands across four categories and serve key markets including the USA, Canada, UK, Germany, and India.
+
           </p>
 
-          <div style={{ marginTop: "30px", display: "flex", gap: "16px", justifyContent: "center", flexWrap: "wrap" }}>
-            <a href="#brands" style={{ background: "white", color: "black", padding: "12px 24px", borderRadius: "999px", textDecoration: "none" }}>
+
+
+          <div class="pill-list">
+
+            <span class="pill">United States</span>
+
+            <span class="pill">Canada</span>
+
+            <span class="pill">United Kingdom</span>
+
+            <span class="pill">Germany</span>
+
+            <span class="pill">India</span>
+
+          </div>
+
+
+
+          <div class="cta-row">
+
+            <a class="btn btn-primary" href="#brands">
+
               Explore Our Brands
+
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+
+                <path d="M5 12h14"></path>
+
+                <path d="M13 5l7 7-7 7"></path>
+
+              </svg>
+
             </a>
 
-            <a href="#contact" style={{ border: "1px solid rgba(255,255,255,0.3)", padding: "12px 24px", borderRadius: "999px", textDecoration: "none", color: "white" }}>
-              Contact Us
-            </a>
-          </div>
-
-          <div style={{ marginTop: "40px", fontSize: "14px", color: "#9ca3af" }}>
-            Scroll to discover ↓
-          </div>
-
-        </div>
-      </section>
-
-
-      {/* ABOUT */}
-      <section style={{ padding: "80px 24px", borderTop: "1px solid #1f2937" }}>
-
-        <div style={{ maxWidth: "1100px", margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(250px,1fr))", gap: "40px" }}>
-
-          <div>
-            <h3 style={{ fontSize: "20px", fontWeight: "600", marginBottom: "10px" }}>Global Presence</h3>
-            <p style={{ color: "#9ca3af" }}>
-              Our brands serve customers across North America and Europe through global ecommerce marketplaces.
-            </p>
-          </div>
-
-          <div>
-            <h3 style={{ fontSize: "20px", fontWeight: "600", marginBottom: "10px" }}>Multi Brand Portfolio</h3>
-            <p style={{ color: "#9ca3af" }}>
-              We build focused brands across healthcare, leather goods, lifestyle accessories and home products.
-            </p>
-          </div>
-
-          <div>
-            <h3 style={{ fontSize: "20px", fontWeight: "600", marginBottom: "10px" }}>Design Driven</h3>
-            <p style={{ color: "#9ca3af" }}>
-              Every product is designed with a balance of functionality, aesthetics and long term durability.
-            </p>
-          </div>
-
-        </div>
-      </section>
-
-
-      {/* BRANDS */}
-      <section id="brands" style={{ padding: "80px 24px", borderTop: "1px solid #1f2937" }}>
-
-        <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
-
-          <h2 style={{ fontSize: "40px", fontWeight: "700", textAlign: "center", marginBottom: "50px" }}>
-            Our Brands
-          </h2>
-
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(280px,1fr))", gap: "24px" }}>
-
-            {brandCard("MasterMedi", "Healthcare and wellness essentials designed for everyday hygiene and wellbeing.")}
-            {brandCard("Karma Pledge", "Sustainable lifestyle products focused on responsible consumption and eco friendly materials.")}
-            {brandCard("Luxeoria", "Premium leather accessories crafted for durability, timeless design, and global appeal.")}
-            {brandCard("Urban Hut", "Modern home and lifestyle products that combine practicality with urban aesthetics.")}
+            <a class="btn btn-secondary" href="#contact">Contact Us</a>
 
           </div>
 
-        </div>
-      </section>
 
 
-      {/* CONTACT */}
-      <section id="contact" style={{ padding: "80px 24px", borderTop: "1px solid #1f2937", textAlign: "center" }}>
+          <a class="scroll-link" href="#about">
 
-        <div style={{ maxWidth: "700px", margin: "0 auto" }}>
+            Scroll to discover
 
-          <h2 style={{ fontSize: "40px", fontWeight: "700", marginBottom: "20px" }}>
-            Work With Us
-          </h2>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
 
-          <p style={{ color: "#9ca3af", marginBottom: "30px" }}>
-            Interested in partnering with Indivation Exports or distributing our brands globally? Get in touch with our team.
-          </p>
+              <path d="M12 5v14"></path>
 
-          <a href="mailto:info@indivation.com" style={{ background: "white", color: "black", padding: "14px 32px", borderRadius: "999px", textDecoration: "none" }}>
-            Contact Our Team
+              <path d="M6 13l6 6 6-6"></path>
+
+            </svg>
+
           </a>
 
         </div>
-      </section>
 
 
-      {/* FOOTER */}
-      <footer style={{ borderTop: "1px solid #1f2937", padding: "30px", textAlign: "center", color: "#6b7280", fontSize: "14px" }}>
-        © {new Date().getFullYear()} Indivation Exports Pvt Ltd. All rights reserved.
-      </footer>
 
-    </div>
-  );
-}
+        <div class="hero-card reveal">
+
+          <div class="hero-top">
+
+            <div class="hero-top-left">
+
+              <div class="hero-mini-logo">
+
+                <img src="assets/indivation-logo.png" alt="Indivation logo" />
+
+              </div>
+
+              <div>
+
+                <div class="mini-label">Indivation</div>
+
+                <strong>Global House of Brands</strong>
+
+              </div>
+
+            </div>
+
+            <div class="status-pill">Active Markets</div>
+
+          </div>
 
 
-// reusable brand card component
-function brandCard(title, description) {
-  return (
-    <div
-      style={{
-        border: "1px solid #1f2937",
-        borderRadius: "16px",
-        padding: "24px",
-        background: "#111",
-        transition: "transform .3s"
-      }}
-      onMouseEnter={(e) => (e.currentTarget.style.transform = "translateY(-6px)")}
-      onMouseLeave={(e) => (e.currentTarget.style.transform = "translateY(0px)")}
-    >
-      <h3 style={{ fontSize: "22px", fontWeight: "600", marginBottom: "10px" }}>{title}</h3>
-      <p style={{ color: "#9ca3af" }}>{description}</p>
-    </div>
-  );
-}
+
+          <div class="brand-preview-grid">
+
+            <article class="brand-preview-card orange">
+
+              <div class="brand-logo-box" data-fallback="MasterMedi">
+
+                <img src="assets/mastermedi.png" alt="MasterMedi logo" />
+
+                <strong>MasterMedi</strong>
+
+                <span>Brand Identity</span>
+
+              </div>
+
+              <p class="section-text" style="margin-top:14px; font-size:14px;">Oral &amp; Personal Care</p>
+
+            </article>
+
+
+
+            <article class="brand-preview-card soft">
+
+              <div class="brand-logo-box" data-fallback="KarmaPledge">
+
+                <img src="assets/karmapledge.png" alt="KarmaPledge logo" />
+
+                <strong>KarmaPledge</strong>
+
+                <span>Brand Identity</span>
+
+              </div>
+
+              <p class="section-text" style="margin-top:14px; font-size:14px;">Natural Stone Jewelry</p>
+
+            </article>
+
+
+
+            <article class="brand-preview-card orange">
+
+              <div class="brand-logo-box" data-fallback="UrbanHut">
+
+                <img src="assets/urbanhut.png" alt="UrbanHut logo" />
+
+                <strong>UrbanHut</strong>
+
+                <span>Brand Identity</span>
+
+              </div>
+
+              <p class="section-text" style="margin-top:14px; font-size:14px;">Home Textiles</p>
+
+            </article>
+
+
+
+            <article class="brand-preview-card soft">
+
+              <div class="brand-logo-box" data-fallback="Luxeoria">
+
+                <img src="assets/luxeoria.png" alt="Luxeoria logo" />
+
+                <strong>Luxeoria</strong>
+
+                <span>Brand Identity</span>
+
+              </div>
+
+              <p class="section-text" style="margin-top:14px; font-size:14px;">Leather Goods</p>
+
+            </article>
+
+          </div>
+
+
+
+          <div class="hero-note">
+
+            <div class="mini-label">Built in India • Selling globally</div>
+
+            <p>
+
+              From thoughtful product creation to cross-border execution, we build brands with global ambition and long-term intent.
+
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <section id="about" class="container">
+
+      <div class="about-wrap">
+
+        <div class="reveal">
+
+          <div class="section-eyebrow">Who we are</div>
+
+          <h2>A focused export-led company designed as a house of brands.</h2>
+
+          <p class="section-text">
+
+            We create and scale distinct consumer brands that combine category focus, market understanding, and reliable execution.
+
+          </p>
+
+        </div>
+
+
+
+        <div class="about-grid">
+
+          <article class="about-card reveal">
+
+            <div class="card-eyebrow">What we do</div>
+
+            <p>
+
+              We operate across four categories through dedicated brands, each created with a clear customer promise and product identity.
+
+            </p>
+
+          </article>
+
+
+
+          <article class="about-card reveal">
+
+            <div class="card-eyebrow">Why we exist</div>
+
+            <p>
+
+              To build Indian-origin brands that can compete globally with stronger design, better quality, and deeper consumer relevance.
+
+            </p>
+
+          </article>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <section id="brands" class="container">
+
+      <div class="section-head reveal">
+
+        <div>
+
+          <div class="section-eyebrow">Our brands</div>
+
+          <h2>Four categories. Four distinct identities. One group vision.</h2>
+
+          <p>
+
+            Each brand has its own positioning and personality while being backed by the strength of Indivation.
+
+          </p>
+
+        </div>
+
+        <div class="pill">Unified logo treatment • same color • same scale</div>
+
+      </div>
+
+
+
+      <div class="brands-grid">
+
+        <article class="brand-card orange reveal">
+
+          <div class="brand-logo-box" data-fallback="MasterMedi">
+
+            <img src="assets/mastermedi.png" alt="MasterMedi logo" />
+
+            <strong>MasterMedi</strong>
+
+            <span>Brand Identity</span>
+
+          </div>
+
+          <div class="category">Oral &amp; Personal Care</div>
+
+          <p>
+
+            Everyday wellness products designed with better routines, cleaner details, and stronger consumer trust.
+
+          </p>
+
+        </article>
+
+
+
+        <article class="brand-card soft reveal">
+
+          <div class="brand-logo-box" data-fallback="KarmaPledge">
+
+            <img src="assets/karmapledge.png" alt="KarmaPledge logo" />
+
+            <strong>KarmaPledge</strong>
+
+            <span>Brand Identity</span>
+
+          </div>
+
+          <div class="category">Natural Stone Jewelry</div>
+
+          <p>
+
+            Meaningful handcrafted creations inspired by nature, intention, and artisanal storytelling.
+
+          </p>
+
+        </article>
+
+
+
+        <article class="brand-card orange reveal">
+
+          <div class="brand-logo-box" data-fallback="UrbanHut">
+
+            <img src="assets/urbanhut.png" alt="UrbanHut logo" />
+
+            <strong>UrbanHut</strong>
+
+            <span>Brand Identity</span>
+
+          </div>
+
+          <div class="category">Home Textiles</div>
+
+          <p>
+
+            Comfort-led home essentials created to blend quality, utility, and elevated everyday living.
+
+          </p>
+
+        </article>
+
+
+
+        <article class="brand-card soft reveal">
+
+          <div class="brand-logo-box" data-fallback="Luxeoria">
+
+            <img src="assets/luxeoria.png" alt="Luxeoria logo" />
+
+            <strong>Luxeoria</strong>
+
+            <span>Brand Identity</span>
+
+          </div>
+
+          <div class="category">Leather Goods</div>
+
+          <p>
+
+            Modern leather accessories shaped with timeless appeal, function, and fine material presence.
+
+          </p>
+
+        </article>
+
+      </div>
+
+    </section>
+
+
+
+    <section id="how" class="container">
+
+      <div class="section-head reveal">
+
+        <div>
+
+          <div class="section-eyebrow">How we do it</div>
+
+          <h2>We combine brand thinking, product execution, and export capability.</h2>
+
+          <p>
+
+            The model is simple: build clear brands, create dependable products, and scale in the right markets.
+
+          </p>
+
+        </div>
+
+      </div>
+
+
+
+      <div class="how-grid">
+
+        <article class="principle-card reveal">
+
+          <div class="icon-badge" aria-hidden="true">
+
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+
+              <path d="M12 3l8 4-8 4-8-4 8-4z"></path>
+
+              <path d="M4 12l8 4 8-4"></path>
+
+              <path d="M4 17l8 4 8-4"></path>
+
+            </svg>
+
+          </div>
+
+          <h3>Build Distinct Brands</h3>
+
+          <p>Each category is developed with its own identity, positioning, and customer promise.</p>
+
+        </article>
+
+
+
+        <article class="principle-card reveal">
+
+          <div class="icon-badge" aria-hidden="true">
+
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+
+              <path d="M12 2l7 4v6c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6l7-4z"></path>
+
+              <path d="M9 12l2 2 4-4"></path>
+
+            </svg>
+
+          </div>
+
+          <h3>Deliver Global Quality</h3>
+
+          <p>We align product thinking, packaging, and compliance for international markets from the start.</p>
+
+        </article>
+
+
+
+        <article class="principle-card reveal">
+
+          <div class="icon-badge" aria-hidden="true">
+
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+
+              <path d="M7 12l5 5 5-5"></path>
+
+              <path d="M7 7l5 5 5-5"></path>
+
+            </svg>
+
+          </div>
+
+          <h3>Scale With Trust</h3>
+
+          <p>We grow through dependable execution, long-term relationships, and market-led decision making.</p>
+
+        </article>
+
+      </div>
+
+    </section>
+
+
+
+    <section id="presence" class="container">
+
+      <div class="presence-wrap">
+
+        <div class="reveal">
+
+          <div class="section-eyebrow">Global presence</div>
+
+          <h2>Selling across key international markets with an India-first foundation.</h2>
+
+          <p class="section-text">
+
+            Our footprint reflects the way we think: focused categories, export-ready operations, and long-term brand building.
+
+          </p>
+
+        </div>
+
+
+
+        <div class="card reveal" style="padding: 28px;">
+
+          <div class="market-grid">
+
+            <article class="market-card">
+
+              <div class="market-label">Market</div>
+
+              <h3>United States</h3>
+
+            </article>
+
+            <article class="market-card">
+
+              <div class="market-label">Market</div>
+
+              <h3>Canada</h3>
+
+            </article>
+
+            <article class="market-card">
+
+              <div class="market-label">Market</div>
+
+              <h3>United Kingdom</h3>
+
+            </article>
+
+            <article class="market-card">
+
+              <div class="market-label">Market</div>
+
+              <h3>Germany</h3>
+
+            </article>
+
+            <article class="market-card">
+
+              <div class="market-label">Market</div>
+
+              <h3>India</h3>
+
+            </article>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <section id="contact" class="container">
+
+      <div class="contact-card reveal">
+
+        <div class="contact-grid">
+
+          <div>
+
+            <div class="contact-head">
+
+              <img src="assets/indivation-logo.png" alt="Indivation logo" />
+
+              <div>
+
+                <div class="section-eyebrow">Contact</div>
+
+                <h2>Indivation Exports Private Limited</h2>
+
+              </div>
+
+            </div>
+
+            <p class="contact-text">Quietly building brands. Confidently selling to the world.</p>
+
+          </div>
+
+
+
+          <div class="address-card">
+
+            <div class="market-label">
+
+              <span class="inline-icon" aria-hidden="true">
+
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+
+                  <path d="M12 21s-7-5.3-7-11a7 7 0 1 1 14 0c0 5.7-7 11-7 11z"></path>
+
+                  <circle cx="12" cy="10" r="2.5"></circle>
+
+                </svg>
+
+              </span>
+
+              Address
+
+            </div>
+
+            <strong>59B, Pace City I, Sector 37</strong>
+
+            <p>Gurgaon 122004 (HR) India</p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+
+  <script>
+
+    const menuToggle = document.getElementById('menuToggle');
+
+    const mobilePanel = document.getElementById('mobilePanel');
+
+    const mobileLinks = mobilePanel.querySelectorAll('a');
+
+    const navLinks = document.querySelectorAll('.desktop-nav a, .mobile-panel a');
+
+    const sections = document.querySelectorAll('main section[id]');
+
+    const revealElements = document.querySelectorAll('.reveal');
+
+    const logoBoxes = document.querySelectorAll('.brand-logo-box');
+
+
+
+    menuToggle.addEventListener('click', () => {
+
+      const isOpen = mobilePanel.classList.toggle('open');
+
+      menuToggle.setAttribute('aria-expanded', String(isOpen));
+
+    });
+
+
+
+    mobileLinks.forEach(link => {
+
+      link.addEventListener('click', () => {
+
+        mobilePanel.classList.remove('open');
+
+        menuToggle.setAttribute('aria-expanded', 'false');
+
+      });
+
+    });
+
+
+
+    logoBoxes.forEach(box => {
+
+      const img = box.querySelector('img');
+
+      const fallback = box.getAttribute('data-fallback') || 'Brand';
+
+      const strong = box.querySelector('strong');
+
+
+
+      if (strong) strong.textContent = fallback;
+
+
+
+      img.addEventListener('error', () => {
+
+        box.classList.add('is-fallback');
+
+      });
+
+
+
+      if (!img.complete) return;
+
+      if (img.naturalWidth === 0) {
+
+        box.classList.add('is-fallback');
+
+      }
+
+    });
+
+
+
+    const revealObserver = new IntersectionObserver((entries) => {
+
+      entries.forEach(entry => {
+
+        if (entry.isIntersecting) {
+
+          entry.target.classList.add('is-visible');
+
+          revealObserver.unobserve(entry.target);
+
+        }
+
+      });
+
+    }, { threshold: 0.14 });
+
+
+
+    revealElements.forEach(el => revealObserver.observe(el));
+
+
+
+    const setActiveNav = () => {
+
+      let currentId = '';
+
+      sections.forEach(section => {
+
+        const rect = section.getBoundingClientRect();
+
+        if (rect.top <= 140 && rect.bottom >= 140) {
+
+          currentId = section.id;
+
+        }
+
+      });
+
+
+
+      navLinks.forEach(link => {
+
+        const isActive = link.getAttribute('href') === `#${currentId}`;
+
+        link.classList.toggle('active', isActive);
+
+      });
+
+    };
+
+
+
+    window.addEventListener('scroll', setActiveNav, { passive: true });
+
+    setActiveNav();
+
+  </script>
+
+</body>
+
+</html>
